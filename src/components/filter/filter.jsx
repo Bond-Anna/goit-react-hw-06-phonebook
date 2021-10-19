@@ -1,8 +1,12 @@
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import contactsActions from "../../redux/contacts/contacts-actions";
 import css from "./filter.module.css";
 
-const Filter = ({ onChange }) => {
+export default function Filter() {
+  const dispatch = useDispatch();
+  const onChange = (event) =>
+    dispatch(contactsActions.contactsFilter(event.currentTarget.value));
+
   return (
     <label className={css.filterLabel}>
       Find contacts by name
@@ -15,11 +19,11 @@ const Filter = ({ onChange }) => {
       />
     </label>
   );
-};
+}
 
-const mapDispatchToProps = (dispatch) => ({
-  onChange: (event) =>
-    dispatch(contactsActions.contactsFilter(event.currentTarget.value)),
-});
+// const mapDispatchToProps = dispatch => ({
+//   onChange: event =>
+//     dispatch(contactsActions.contactsFilter(event.currentTarget.value)),
+// });
 
-export default connect(null, mapDispatchToProps)(Filter);
+// export default connect(null, mapDispatchToProps)(Filter);
